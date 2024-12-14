@@ -2,6 +2,11 @@
 
 namespace App\Infrastructure\Providers;
 
+use App\Application\EventHandlers\ClinicalResource\NotifyNutritionist;
+use App\Application\EventHandlers\ClinicalResource\NotifyNutritionistWhenCreatedAppointment;
+use App\Domain\Events\ClinicalResourceAdded;
+use App\Domain\Events\CreatedAppointment;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +24,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Event::listen(ClinicalResourceAdded::class,NotifyNutritionist::class);
+        Event::listen(CreatedAppointment::class,NotifyNutritionistWhenCreatedAppointment::class);
     }
 }

@@ -6,13 +6,13 @@ use App\Shared\BusinessRule;
 
 class StringNotNullOrEmptyRule implements BusinessRule
 {
-    private string $value;
+    private ?string $value;
     protected string $message = 'The value is required';
 
     /**
-     * @param string $value
+     * @param ?string $value
      */
-    public function __construct(string $value)
+    public function __construct(?string $value)
     {
         $this->value = $value;
     }

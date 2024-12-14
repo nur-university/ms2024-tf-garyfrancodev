@@ -41,4 +41,8 @@ abstract class Entity
         return $this->domainEvents;
     }
 
+    public function getId(): string
+    {
+        return $this->id;
+    }
 }

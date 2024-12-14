@@ -4,7 +4,7 @@ namespace App\Domain\Events;
 
 use Illuminate\Foundation\Events\Dispatchable;
 
-class ClinicalResourceAdded
+class CreatedAppointment
 {
     use Dispatchable;
 
@@ -13,6 +13,6 @@ class ClinicalResourceAdded
      */
     public function __construct()
     {
-        error_log("Evento ClinicalResourceAdded disparado");
+
     }
 }
