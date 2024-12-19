@@ -14,10 +14,12 @@ return new class extends Migration
         Schema::create('patients', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('user_id')->unique();
-            $table->string('fullname');
+            $table->string('email');
+            $table->string('full_name');
             $table->date('dob');
             $table->enum('gender', ['male', 'female','other']);
             $table->string('phone');
+            $table->string('dni')->unique();
             $table->timestamps();
 
             $table->softDeletes();

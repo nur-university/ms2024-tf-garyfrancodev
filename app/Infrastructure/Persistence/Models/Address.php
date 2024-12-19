@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Patient extends Model
+class Address extends Model
 {
     use HasFactory, SoftDeletes;
 
@@ -16,21 +16,8 @@ class Patient extends Model
 
     protected $fillable = [
         'id',
-        'user_id',
-        'name',
-        'dob',
-        'gender',
-        'phone',
-        'email',
-        'full_name',
-        'dni'
+        'patient_id',
+        'address',
+        'gps',
     ];
-
-    protected function casts(): array
-    {
-        return [
-          'dob' => 'date'
-        ];
-    }
-
 }

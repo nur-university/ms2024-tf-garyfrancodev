@@ -2,7 +2,7 @@
 
 namespace App\Domain\ValueObjects;
 
-class Address
+class AddressVO
 {
     private string $street;
     private string $city;
@@ -19,7 +19,7 @@ class Address
         $this->postalCode = $postalCode;
     }
 
-    public function __toString(): string
+    public function getValue(): string
     {
         return "{$this->street}, {$this->city}, {$this->postalCode}";
     }

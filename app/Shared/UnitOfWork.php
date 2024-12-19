@@ -2,14 +2,17 @@
 
 namespace App\Shared;
 
-use Exception;
 interface UnitOfWork
 {
-    /**
-     * Commit all changes within the current unit of work.
-     *
-     * @param array $options Optional parameters for customization.
-     * @throws Exception If the commit fails.
-     */
-    public function commitAsync(array $options = []): void;
+    public function beginTransaction(): void;
+
+    public function commit(): void;
+
+    public function rollback(): void;
+
+    public function execute(callable $callback): mixed;
+
+    public function addDomainEvents(array $events): void;
+
+    public function dispatchDomainEvents(): void;
 }

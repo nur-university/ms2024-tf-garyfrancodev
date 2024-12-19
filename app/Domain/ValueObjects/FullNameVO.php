@@ -2,7 +2,7 @@
 
 namespace App\Domain\ValueObjects;
 
-class FullName
+class FullNameVO
 {
     private string $firstName;
     private string $lastName;
@@ -17,11 +17,6 @@ class FullName
         $this->lastName = $lastName;
     }
 
-    public function __toString(): string
-    {
-        return "{$this->firstName} {$this->lastName}";
-    }
-
     public function getFirstName(): string
     {
         return $this->firstName;
@@ -30,5 +25,9 @@ class FullName
     public function getLastName(): string
     {
         return $this->lastName;
+    }
+
+    public function getFullName(): string {
+        return "{$this->firstName} {$this->lastName}";
     }
 }

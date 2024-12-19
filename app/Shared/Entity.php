@@ -6,7 +6,7 @@ use Illuminate\Support\Str;
 
 abstract class Entity
 {
-    protected string $id;
+    protected ?string $id;
 
     protected array $domainEvents;
 
@@ -17,6 +17,7 @@ abstract class Entity
         }
 
         $this->id = $id ?? Str::uuid()->toString();
+        $this->domainEvents = array();
     }
 
     protected function checkRule($rule): void

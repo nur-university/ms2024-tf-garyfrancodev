@@ -8,5 +8,5 @@ interface Repository
 {
     public function getByIdAsync(string $id): Model;
 
-    public function addAsync($entity): void;
+    public function addAsync($entity): Model;
 }

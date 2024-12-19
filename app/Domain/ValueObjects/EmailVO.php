@@ -9,7 +9,7 @@ use App\Shared\ValueObject;
 use App\Domain\Rules\StringNotNullOrEmptyRule;
 use App\Domain\Exceptions\StringNotNullOrEmptyException;
 
-class Email extends ValueObject
+class EmailVO extends ValueObject
 {
     private string $email;
 

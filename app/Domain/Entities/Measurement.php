@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Domain\Aggregates;
+namespace App\Domain\Entities;
 
 use App\Shared\AggregateRoot;
+use App\Shared\Entity;
 
-class Measurement extends AggregateRoot
+class Measurement extends Entity
 {
     private string $patientId;
-    private string $consultationId;
+    private ?string $consultationId;
     private string $height;
     private string $weight;
     private string $bodyFat;
@@ -15,13 +16,13 @@ class Measurement extends AggregateRoot
 
     /**
      * @param string $patientId
-     * @param string $consultationId
+     * @param ?string $consultationId
      * @param string $height
      * @param string $weight
      * @param string $bodyFat
      * @param string $notes
      */
-    public function __construct(string $patientId, string $consultationId, string $height, string $weight, string $bodyFat, string $notes, ?string $id)
+    public function __construct(string $patientId, ?string $consultationId, string $height, string $weight, string $bodyFat, string $notes, ?string $id)
     {
         parent::__construct($id);
         $this->consultationId = $consultationId;

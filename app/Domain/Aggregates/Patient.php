@@ -2,33 +2,84 @@
 
 namespace App\Domain\Aggregates;
 
-use App\Domain\ValueObjects\Address;
-use App\Domain\ValueObjects\Email;
-use App\Domain\ValueObjects\FullName;
-use App\Domain\ValueObjects\IdentificationNumber;
+use App\Domain\Events\PatientCreated;
+use App\Domain\ValueObjects\DniVO;
+use App\Domain\ValueObjects\DobVO;
+use App\Domain\ValueObjects\EmailVO;
+use App\Domain\ValueObjects\FullNameVO;
+use App\Domain\ValueObjects\GenderVO;
 use App\Shared\AggregateRoot;
 
 class Patient extends AggregateRoot
 {
+    private DobVO $dobVO;
+    private EmailVO $emailVO;
+    private FullNameVO $fullNameVO;
+    private GenderVO $genderVO;
+    private DniVO $dniVO;
+    private string $phone;
     private string $userId;
-    private FullName $fullName;
-    private Address $address;
-    private Email $email;
-    private IdentificationNumber $identificationNumber;
 
-
-    public function __construct(string $userId, FullName $fullName, Address $address, Email $email, IdentificationNumber $identificationNumber, ?string $id = null)
+    /**
+     * @param DobVO $dobVO
+     * @param EmailVO $emailVO
+     * @param FullNameVO $fullNameVO
+     * @param GenderVO $genderVO
+     * @param DniVO $dniVO
+     * @param string $phone
+     * @param string $userId
+     * @param ?string $id
+     */
+    public function __construct(DobVO $dobVO, EmailVO $emailVO, FullNameVO $fullNameVO, GenderVO $genderVO, DniVO $dniVO, string $phone, string $userId, ?string $id)
     {
         parent::__construct($id);
-        $this->identificationNumber = $identificationNumber;
-        $this->fullName = $fullName;
-        $this->address = $address;
+        $this->fullNameVO = $fullNameVO;
+        $this->genderVO = $genderVO;
+        $this->emailVO = $emailVO;
         $this->userId = $userId;
-        $this->email = $email;
+        $this->dniVO = $dniVO;
+        $this->phone = $phone;
+        $this->dobVO = $dobVO;
+        $this->domainEvents[] = new PatientCreated($emailVO->getEmail());
     }
 
-    public function updateFullName(FullName $fullName): void
+    public function updateFullName(FullNameVO $fullNameVO): void
     {
-        $this->fullName = $fullName;
+        $this->fullNameVO = $fullNameVO;
+    }
+
+    public function getDob(): DobVO
+    {
+        return $this->dobVO;
+    }
+
+    public function getEmail(): EmailVO
+    {
+        return $this->emailVO;
+    }
+
+    public function getFullName(): FullNameVO
+    {
+        return $this->fullNameVO;
+    }
+
+    public function getGender(): GenderVO
+    {
+        return $this->genderVO;
+    }
+
+    public function getDni(): DniVO
+    {
+        return $this->dniVO;
+    }
+
+    public function getPhone(): string
+    {
+        return $this->phone;
+    }
+
+    public function getUserId(): string
+    {
+        return $this->userId;
     }
 }

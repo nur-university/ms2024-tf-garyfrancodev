@@ -19,7 +19,7 @@ class AppointmentRepositoryImpl implements AppointmentRepository
     /**
      * @param AppointmentDomain $entity
      */
-    public function addAsync($entity): void
+    public function addAsync($entity): Model
     {
         $data = [
             'id' => $entity->getId(),
@@ -29,7 +29,7 @@ class AppointmentRepositoryImpl implements AppointmentRepository
             'status' => $entity->getStatus()
         ];
 
-        Appointment::create($data);
+        return Appointment::create($data);
     }
 
     public function getAppointmentsByNutritionistId($id): Collection

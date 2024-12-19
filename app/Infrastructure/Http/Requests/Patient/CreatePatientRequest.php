@@ -2,7 +2,9 @@
 
 namespace App\Infrastructure\Http\Requests\Patient;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class CreatePatientRequest extends FormRequest
 {
@@ -11,7 +13,7 @@ class CreatePatientRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,6 +23,21 @@ class CreatePatientRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [];
+        return [
+            'user_id' => 'required',
+            'gender' => 'required',
+            'full_name' => 'required',
+            'dob' => 'required',
+            'phone' => 'required'
+        ];
+    }
+
+    public function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(response()->json([
+            'success' => false,
+            'message' => 'Validation errors',
+            'data' => $validator->errors()
+        ]));
     }
 }

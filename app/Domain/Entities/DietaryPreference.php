@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Domain\Aggregates;
+namespace App\Domain\Entities;
 
-use App\Shared\AggregateRoot;
+use App\Shared\Entity;
 
-class DietaryPreference extends AggregateRoot
+class DietaryPreference extends Entity
 {
     private string $patientId;
     private string $preference;
@@ -20,7 +20,8 @@ class DietaryPreference extends AggregateRoot
         $this->preference = $preference;
     }
 
-    public function updatePreference($newValue){
+    public function updatePreference($newValue)
+    {
         $this->preference = $newValue;
     }
 
